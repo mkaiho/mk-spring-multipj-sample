@@ -18,6 +18,7 @@ subprojects {
     apply plugin: "io.spring.dependency-management"
     apply plugin: "java-library"
 	apply plugin: 'groovy'
+	apply plugin: 'jacoco'
 
 	group = 'com.mkaiho.mpexample'
 	version = '0.0.1-SNAPSHOT'
@@ -32,5 +33,9 @@ subprojects {
 
 	tasks.named('test') {
 		useJUnitPlatform()
+	}
+
+	jacocoTestReport {
+		dependsOn test
 	}
 }
