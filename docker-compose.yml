@@ -1,0 +1,24 @@
+version: '3.9'
+
+# Environment variables for mysql database
+x-mysql-user: &MYSQL_USER devuser
+x-mysql-password: &MYSQL_PASSWORD devdev
+x-mysql-database: &MYSQL_DATABASE devdb
+
+services:
+  mysqldb-local:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    container_name: mysqldb-local
+    ports:
+      - 13306:3306
+    volumes:
+      - ./docker/mysql/init.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+      - ./docker/mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: *MYSQL_USER
+      MYSQL_PASSWORD: *MYSQL_PASSWORD
+      MYSQL_DATABASE: *MYSQL_DATABASE

@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+    }
+}
+
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+}
+
+subprojects {
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: "java"
+	apply plugin: 'groovy'
+
+	group = 'com.mkaiho.mpexample'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '11'
+
+	dependencies {
+		compileOnly 'org.projectlombok:lombok:1.18.20'
+		testImplementation "org.spockframework:spock-core:2.0-groovy-3.0"
+	}
+}
