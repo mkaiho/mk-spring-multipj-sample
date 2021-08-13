@@ -16,7 +16,7 @@ allprojects {
 
 subprojects {
     apply plugin: "io.spring.dependency-management"
-    apply plugin: "java"
+    apply plugin: "java-library"
 	apply plugin: 'groovy'
 
 	group = 'com.mkaiho.mpexample'
@@ -25,6 +25,12 @@ subprojects {
 
 	dependencies {
 		compileOnly 'org.projectlombok:lombok:1.18.20'
+
+		testImplementation 'org.codehaus.groovy:groovy:3.0.7'
 		testImplementation "org.spockframework:spock-core:2.0-groovy-3.0"
+	}
+
+	tasks.named('test') {
+		useJUnitPlatform()
 	}
 }
